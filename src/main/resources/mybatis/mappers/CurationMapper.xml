@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezenbooks.main.dao.CurationDAO">
+	<select id="getCurationList" resultType="BookDTO">
+		select * from books 
+		where book_num in
+		<foreach collection="list" item="num" open="(" separator="," close=")">
+			#{num}
+		</foreach>
+		order by decode (book_num, 
+		<foreach collection="list" item="num" index="index" separator="," close=")">
+			#{num}, #{index}
+		</foreach>
+	</select>
+	
+	<select id="getReviewData" resultType="ReviewDTO">
+		select br.USER_ID, br.BOOK_NUM, br.REVIEW_RATING
+		from BOOK_REVIEW br
+	</select>
+	
+	<select id="getUsersCount" resultType="int">
+		select count(*) from users
+	</select>
+	
+	<select id="getBooksCount" resultType="int">
+		select count(*) from books
+	</select>
+</mapper>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+    
