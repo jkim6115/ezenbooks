@@ -43,7 +43,7 @@ public class MainController {
 	public ResponseEntity<List<BookDTO>> getList(@PathVariable(required = false) Integer user_id, 
 												 @PathVariable(required = false) Integer bought) {
 		
-		// 로그인이 안된 사용자 이거나, 구매 내역이 없는 사용자인 경우
+		// 로그인이 안된 사용자 이거나, 내역이 없는 사용자인 경우
 		if (user_id == null || bought == null) {
 			List<BookDTO> list = curationService.curationProcess(1, 1);
 			

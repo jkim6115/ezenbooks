@@ -53,9 +53,6 @@ public class CurationServiceImpl extends Calculator implements CurationService {
 			}
 		}
 		
-		/*
-		 * 사용자가 아직 구매하지 않은 아이템 j
-		 */
 		// 유사도 정렬
 		Item itemBought = new Item(bought, s, u, NUM_USERS);
 		
@@ -66,7 +63,7 @@ public class CurationServiceImpl extends Calculator implements CurationService {
 			}
 		}
 		
-		// 인기도 순 정렬
+		// 인기도 정렬
 		Set<Item> set2 = new TreeSet<>(itemBought.new PopularityComparator());
 		int count1 = 0;
 		for (Item item : set1) {
@@ -91,9 +88,6 @@ public class CurationServiceImpl extends Calculator implements CurationService {
 		List<BookDTO> result = new ArrayList<>();
 		result = dao.getCurationList(list);
 		
-		/*
-		 * 가장 최근 본(구매한) 상품의 번호를 기반으로 추천해준다 -> bought
-		 */
 		return result;
 	}
 	
