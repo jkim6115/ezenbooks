@@ -16,7 +16,7 @@
 		</foreach>
 	</select>
 	
-	<select id="getReviewData" resultType="ReviewDTO">
+	<select id="getReviewData" resultType="DataSetDTO">
 		select br.USER_ID, br.BOOK_NUM, br.REVIEW_RATING
 		from BOOK_REVIEW br
 	</select>
@@ -27,6 +27,13 @@
 	
 	<select id="getBooksCount" resultType="int">
 		select count(*) from books
+	</select>
+	
+	<select id="getOrderDetailData" resultType="DataSetDTO">
+		select uo.USER_ID as user_id, uod.BOOKS_BOOK_NUM as book_num
+		from USER_ORDER_DETAIL uod join USER_ORDER uo
+    		on uod.ORDER_NUM = uo.ORDER_NUM
+		order by uo.USER_ID
 	</select>
 </mapper>   
 

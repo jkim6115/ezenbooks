@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ReviewDTO {
+public class DataSetDTO {
 	
 	private int user_id;
 	

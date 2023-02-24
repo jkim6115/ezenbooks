@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ezenbooks.main.dao.CurationDAO;
 import com.ezenbooks.main.dto.BookDTO;
-import com.ezenbooks.main.dto.ReviewDTO;
+import com.ezenbooks.main.dto.DataSetDTO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,28 +18,59 @@ import lombok.RequiredArgsConstructor;
 public class CurationServiceImpl extends Calculator implements CurationService {
 	
 	private final CurationDAO dao;
-
-	@Override
-	public List<ReviewDTO> dataSetProcess() {
-		return dao.getReviewData();
-	}
 	
 	@Override
 	public List<BookDTO> curationProcess(int user_id, int bought) {
+		
+		List<DataSetDTO> dataSetList = dao.getOrderDetailData();
+		
+		boolean select = false;
+		
+		List<BookDTO> result = dao.getCurationList(DataAnalysis(user_id, bought, dataSetList, select));
+		
+		return result;
+	}
+	
+	@Override
+	public List<BookDTO> userPickProcess(int user_id, int bought) {
+		
+		List<DataSetDTO> dataSetList = dao.getReviewData();
+		
+		boolean select = true;
+		
+		List<BookDTO> result = dao.getCurationList(DataAnalysis(user_id, bought, dataSetList, select));
+		
+		return result;
+	}
+	
+	/**
+	 * 데이터 분석 로직
+	 * 
+	 * @param user_id
+	 * @param bought
+	 * @param dataSetList
+	 * @param select
+	 * @return List<Integer>
+	 */
+	private List<Integer> DataAnalysis(int user_id, int bought, 
+									   List<DataSetDTO> dataSetList, boolean select) {
+		
 		int NUM_USERS = dao.getUsersCount();
 		int NUM_BOOKS = dao.getBooksCount();
-		
-		List<ReviewDTO> reviewDataList = dao.getReviewData();
 		
 		/*
 		 * 유틸리티 행렬을 얻는다.
 		 */
 		double[][] u = new double[NUM_USERS + 1][NUM_BOOKS + 1];
 		
-		for (ReviewDTO reviewDTO : reviewDataList) {
-			int i = reviewDTO.getUser_id(); // 사용자
-			int j = reviewDTO.getBook_num(); // 아이템
-			u[i][j] = (double)reviewDTO.getReview_rating();
+		for (DataSetDTO data : dataSetList) {
+			int i = data.getUser_id(); // 사용자
+			int j = data.getBook_num(); // 아이템
+			
+			if(select)
+				u[i][j] = (double)data.getReview_rating();
+			else 
+				u[i][j] = 1;
 		}
 		
 		/*
@@ -68,7 +99,7 @@ public class CurationServiceImpl extends Calculator implements CurationService {
 		int count1 = 0;
 		for (Item item : set1) {
 			set2.add(item);
-			if(++count1 == 8) {
+			if(++count1 == 11) {
 				break;
 			}
 		}
@@ -79,16 +110,13 @@ public class CurationServiceImpl extends Calculator implements CurationService {
 		for (Item item : set2) {
 //			System.out.printf("  %d", item.index);
 			list.add(item.index);
-			if (++count2 == 7) {
+			if (++count2 == 10) {
 				break;
 			}
 		}
-		System.out.println();
+//		System.out.println();
 		
-		List<BookDTO> result = new ArrayList<>();
-		result = dao.getCurationList(list);
-		
-		return result;
+		return list;
 	}
 	
 } // end class

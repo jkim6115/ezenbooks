@@ -32,6 +32,7 @@ public class MainController {
 	private final BestsellerService bestsellerService;
 	
 	/**
+	 * 주문 기록 기반 추천
 	 * 접속중인 유저 ID와 최근 본 책의 번호를 받아 추천 리스트를 반환한다.
 	 * 
 	 * @author 김요한
@@ -39,19 +40,44 @@ public class MainController {
 	 * @param bought
 	 * @return List<BookDTO>
 	 */
-	@GetMapping("/curation/{user_id}/{bought}")
-	public ResponseEntity<List<BookDTO>> getList(@PathVariable(required = false) Integer user_id, 
-												 @PathVariable(required = false) Integer bought) {
+	@GetMapping({"/curation/{user_id}/{bought}", "/curation"})
+	public ResponseEntity<List<BookDTO>> curation(@PathVariable(required = false) Integer user_id, 
+												  @PathVariable(required = false) Integer bought) {
+				
+		log.info("user_id: " + user_id);
 		
-		// 로그인이 안된 사용자 이거나, 내역이 없는 사용자인 경우
-		if (user_id == null || bought == null) {
-			List<BookDTO> list = curationService.curationProcess(1, 1);
-			
-			return new ResponseEntity<List<BookDTO>>(list, HttpStatus.OK);
+		if (ObjectUtils.isEmpty(bought) || ObjectUtils.isEmpty(bought)) {
+			user_id = 1;
+			bought = 1;
 		}
 		
-		log.info("user_id: " + user_id);
 		List<BookDTO> list = curationService.curationProcess(user_id, bought);
+		
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+	
+	/**
+	 * 평점 기반 추천
+	 * 접속중인 유저 ID와 최근 본 책의 번호를 받아 추천 리스트를 반환한다.
+	 * 
+	 * @author 김요한
+	 * @param user_id
+	 * @param bought
+	 * @return List<BookDTO>
+	 */
+	@GetMapping({"/userPick/{user_id}/{bought}", "/userPick"})
+	public ResponseEntity<List<BookDTO>> userPick(@PathVariable(required = false) Integer user_id, 
+			 									  @PathVariable(required = false) Integer bought) {
+		
+		// 로그인이 안된 사용자 이거나, 내역이 없는 사용자인 경우
+		log.info("user_id: " + user_id);
+		
+		if (ObjectUtils.isEmpty(bought) || ObjectUtils.isEmpty(bought)) {
+			user_id = 1;
+			bought = 1;
+		}
+		
+		List<BookDTO> list = curationService.userPickProcess(user_id, bought);
 		
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
