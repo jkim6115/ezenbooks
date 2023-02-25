@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezenbooks.main.dao.BooksDAO">
+	<select id="getBookListWithPaging" resultType="BookDTO">
+		<![CDATA[
+			select *
+			from (select /*+INDEX_DESC(BOOKS BOOK_REVIEW_PK) */
+          			rownum rn, b.*
+      			  from BOOKS b
+      			  where rownum <= #{page, jdbcType=INTEGER} * #{size, jdbcType=INTEGER})
+			where rn > (#{page, jdbcType=INTEGER} - 1) * #{size, jdbcType=INTEGER}
+		]]>
+		<trim prefix="AND">
+			<include refid="search" />
+		</trim>
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		SELECT CEIL(COUNT(*) / 10) total_page
+		FROM books
+		<where>
+			<include refid="search" />
+		</where>
+	</select>	
+	
+	<sql id="search">
+		<if test="type == 'title'">
+			book_title like '%' ||  #{keyword} || '%'
+		</if>
+		<if test="type == 'author'">
+			book_author like '%' ||  #{keyword} || '%'
+		</if>
+		<if test="type == 'desc'">
+			book_desc like '%' ||  #{keyword} || '%'
+		</if>
+	</sql>
+</mapper>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+    

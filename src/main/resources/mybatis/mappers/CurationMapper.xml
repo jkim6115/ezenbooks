@@ -5,12 +5,13 @@
 
 <mapper namespace="com.ezenbooks.main.dao.CurationDAO">
 	<select id="getCurationList" resultType="BookDTO">
-		select * from books 
-		where book_num in
+		select b.*, bc.CATEGORY_NAME from BOOKS b
+    	join BOOK_CATEGORY bc on bc.CATEGORY_CODE = b.CATEGORY_CODE
+		where b.BOOK_NUM in
 		<foreach collection="list" item="num" open="(" separator="," close=")">
 			#{num}
 		</foreach>
-		order by decode (book_num, 
+		order by decode (b.BOOK_NUM, 
 		<foreach collection="list" item="num" index="index" separator="," close=")">
 			#{num}, #{index}
 		</foreach>

@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,9 +39,9 @@ public class MainController {
 	 * @param bought
 	 * @return List<BookDTO>
 	 */
-	@GetMapping({"/curation/{user_id}/{bought}", "/curation"})
-	public ResponseEntity<List<BookDTO>> curation(@PathVariable(required = false) Integer user_id, 
-												  @PathVariable(required = false) Integer bought) {
+	@GetMapping("/curation")
+	public ResponseEntity<List<BookDTO>> curation(@RequestParam(required = false) Integer user_id, 
+												  @RequestParam(required = false) Integer bought) {
 				
 		log.info("user_id: " + user_id);
 		
@@ -65,9 +64,9 @@ public class MainController {
 	 * @param bought
 	 * @return List<BookDTO>
 	 */
-	@GetMapping({"/userPick/{user_id}/{bought}", "/userPick"})
-	public ResponseEntity<List<BookDTO>> userPick(@PathVariable(required = false) Integer user_id, 
-			 									  @PathVariable(required = false) Integer bought) {
+	@GetMapping("/userPick")
+	public ResponseEntity<List<BookDTO>> userPick(@RequestParam(required = false) Integer user_id, 
+			                                      @RequestParam(required = false) Integer bought) {
 		
 		// 로그인이 안된 사용자 이거나, 내역이 없는 사용자인 경우
 		log.info("user_id: " + user_id);
