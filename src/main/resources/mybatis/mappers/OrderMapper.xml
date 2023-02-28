@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ezenbooks.order.dao.OrderDAO">
+	<insert id="insertStock">
+		insert into stock (book_num, quantity)
+		values (#{book_num}, #{quantity})
+	</insert>
+	
+	<update id="updateStock">
+		update stock set QUANTITY = QUANTITY + #{quantity} where BOOK_NUM = #{book_num}
+	</update>
+</mapper>   
