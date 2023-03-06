@@ -31,11 +31,16 @@ public class Item {
 	}
 	
 	public double popularity() {
-		double sum = 0;
-		for (int i = 1; i <= NUM_USERS; i++) {
-			sum += u[i][this.index];
-		}
-		return sum;
+		double sum = 0.0;
+        int count = 0;
+        for (int i = 1; i <= NUM_USERS; i++) {
+            double value = u[i][this.index];
+            if (value > 0) {
+                sum += value;
+                ++count;
+            }
+        }
+        return (count > 0 ? sum/count : 0.0);
 	}
 	
 	public double similarity(Item item) {
