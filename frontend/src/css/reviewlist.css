@@ -1,0 +1,54 @@
+/* div {
+  border: 1px solid black;
+} */
+
+.reviewPage-Wrap {
+  margin-left: 15px;
+}
+
+.review_rating {
+  width: 80px;
+}
+
+.review_num,
+.book_num,
+.user_id {
+  width: 100px;
+}
+
+.review_delete,
+.review_reporting_date {
+  width: 120px;
+}
+
+.user_nickname {
+  width: 200px;
+}
+
+table.review_data tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  height: 40px;
+}
+
+th,
+td {
+  border-right: 1px solid lightgray;
+}
+
+td.review_delete {
+  padding: 8px 30px;
+}
+
+td.book_num,
+td.user_id {
+  text-align: left;
+}
+
+td.review_rating {
+  text-align: center;
+}
+
+.review_content {
+  border-right: none;
+  width: 660px;
+}

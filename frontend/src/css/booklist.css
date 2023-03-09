@@ -1,0 +1,87 @@
+div {
+  padding: 0px;
+}
+
+.booklist-table tr {
+  height: 50px;
+  border-top: 1px solid lightgrey;
+}
+
+.book_image {
+  width: 70px;
+}
+
+tr {
+  border: 1px solid lightgrey;
+}
+th.book_num {
+  width: 100px;
+}
+
+.book_price,
+.book_pubdate {
+  width: 120px;
+}
+
+.book_isbn {
+  width: 150px;
+}
+
+.book_category,
+.book_publisher {
+  width: 180px;
+}
+
+.book_author {
+  width: 200px;
+}
+
+.book_title {
+  width: 320px;
+}
+
+table.book_data tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  height: 40px;
+}
+
+div.set_pages_booklist {
+  margin-left: 5px;
+}
+div.bookpage-wrap label {
+  text-align: right !important;
+}
+
+.book_num,
+.book_pubdate,
+.book_isbn {
+  text-align: center;
+}
+
+td.book_price {
+  text-align: right;
+}
+
+td.book_image {
+  padding: 0px;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+#book-add {
+  margin-top: 10px;
+}
+
+.book_isbn {
+  border-right: none;
+}
+
+.userpick-cart {
+  border-right: none;
+}
+
+td.userpick-cart {
+  padding: 18px 0px 0px 35px;
+}

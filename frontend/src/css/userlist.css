@@ -1,0 +1,102 @@
+/* * {
+  border: 1px solid black;
+} */
+
+.user_role {
+  width: 160px;
+}
+
+th.user_id,
+td.user_id {
+  width: 120px;
+  text-align: center;
+}
+
+.create_date,
+.modify_date {
+  width: 150px;
+  text-align: center;
+}
+
+.user_name,
+.user_nickname {
+  width: 200px;
+}
+
+.user_email {
+  width: 350px;
+}
+td.user_name,
+td.user_email,
+td.user_nickname {
+  text-align: left;
+  padding-left: 15px;
+}
+
+table.user_data tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  height: 40px;
+}
+
+div.userpage-wrap label {
+  text-align: right !important;
+}
+.set_pages label {
+  margin-left: -10px;
+}
+
+td.user_role,
+th.user_role,
+td.user_create_date,
+th.user_create_date,
+td.user_modify_date,
+th.user_modify_date,
+td.user_modify,
+td.user_delete {
+  text-align: center;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.UserPage-Wrap {
+  margin-bottom: 30px;
+  margin-left: 15px;
+}
+
+.userPage-wrap {
+  padding: 0px;
+}
+
+tr.form-input {
+  font-size: 20px;
+}
+
+.user-update-table th {
+  width: 200px;
+  height: 50px;
+}
+
+.user-update-table td {
+  width: 300px;
+  border-bottom: 1px solid lightgrey;
+}
+
+.user-update-table input {
+  border: none;
+  width: 100%;
+}
+
+center button {
+  margin-right: 10px;
+}
+
+div.user-update-table {
+  padding-bottom: 10px;
+}
+
+.user_modify {
+  border-right: none;
+  width: 170px;
+}
